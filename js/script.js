@@ -1,35 +1,42 @@
+const searchField = document.getElementById("search-box");
 const errorNotify = document.getElementById("error-handle");
 const bookContainer = document.getElementById("book-container");
+const TotalResultNumber = document.getElementById("total-result");
 const loadBook = () => {
-  const searchFeild = document.getElementById("search-box");
-  const searchText = searchFeild.value;
+  const searchText = searchField.value;
   //   console.log(searchText);
   if (searchText === "") {
     errorNotify.innerHTML = `
     <h3 class="text-center text-danger">Please Write Something!!!</h3>  
     `;
     bookContainer.textContent = "";
+    TotalResultNumber.textContent = "";
   } else {
     fetch(`http://openlibrary.org/search.json?q=${searchText}`)
       .then((res) => res.json())
-      .then((data) => displayData(data.docs));
+      .then((data) => displayData(data));
   }
-  //Clear input feild
-  searchFeild.value = "";
+  //Clear input field
+  searchField.value = "";
 };
 
-const displayData = (books) => {
-  const showCount = document.getElementById("data-counter");
+const displayData = (data) => {
+  const books = data.docs.slice(0, 30);
+  console.log(data.numFound);
+  TotalResultNumber.innerHTML = ` 
+<h5>Total Result found ${data.numFound}</h5>
+`;
   bookContainer.textContent = "";
-  //   console.log(books.length);
+  // console.log(books);
   if (books.length === 0) {
     errorNotify.innerHTML = `
       <h3 class="text-center text-danger">No Result Found!!!</h3>  
       `;
+    TotalResultNumber.textContent = "";
   } else {
     books.forEach((book) => {
       errorNotify.textContent = "";
-      console.log(book);
+      // console.log(book);
       const bookDiv = document.createElement("div");
       bookDiv.innerHTML = `
           <div class="card">
@@ -44,9 +51,12 @@ const displayData = (books) => {
                     }
                   </p>
                   <p class="card-text">
-                  <span class="fw-bold text-muted"> First Published : ${
-                    book.first_publish_year ? book.first_publish_year : ""
-                  } </span>
+                  <span class="fw-bold"> First Published : </span>
+                  ${book.first_publish_year ? book.first_publish_year : ""}
+                  </p>
+                  <p class="card-text">
+                  <span class="fw-bold">Publisher :</span>
+                  ${book.publisher ? book.publisher : ""} 
                   </p>
                 </div>
               </div>

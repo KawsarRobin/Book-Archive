@@ -18,12 +18,13 @@
         height: 350px;
       }
       .card {
-        height: 500px;
+        height: 550px;
       }
     </style>
   </head>
-  <body>
-    <h1 class="text-center m-2 text-muted">Seacrch Your Book</h1>
+  <body class="bg-light">
+    <h1 class="text-center m-2 text-success">Welcome to Book Cave</h1>
+    <h3 class="text-center m-2 text-secondary">Search Your Book</h3>
 
     <div class="input-group mb-3 w-50 mx-auto">
       <input
@@ -43,64 +44,13 @@
         Button
       </button>
     </div>
+
+    <!-- Error handling notify  -->
     <div id="error-handle"></div>
-    <div id="data-counter"></div>
-
+    <!-- Total number of result  -->
+    <div id="total-result" class="text-center text-secondary mb-3"></div>
     <!-- ---------------------Show Result-------------------- -->
-
-    <div id="book-container" class="row row-cols-1 row-cols-md-3 g-4">
-      <!-- <div class="col">
-        <div class="card">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="..." class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-          </div>
-        </div>
-      </div> -->
-    </div>
+    <div id="book-container" class="row row-cols-1 p-5 row-cols-md-3 g-4"></div>
 
     <!-- External Js  -->
     <script src="js/script.js"></script>
