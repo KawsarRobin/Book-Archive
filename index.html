@@ -34,46 +34,51 @@
   </head>
 
   <body class="bg-light">
-    <!-- ------------------------Headline Title------------------------ -->
+    <sec class="container">
+      <!-- ------------------------Header Title------------------------ -->
 
-    <h1 class="text-center m-2 text-success">
-      Welcome to Book<span class="text-info">Archive</span>
-    </h1>
-    <h3 class="text-center m-2 text-secondary">Search Your Favourite Book</h3>
+      <h1 class="text-center m-2 text-success">
+        Welcome to Book<span class="text-info">Archive</span>
+      </h1>
+      <h3 class="text-center m-2 text-secondary">Search Your Favourite Book</h3>
 
-    <!--------------------------------- Input Box ---------------------------------- -->
+      <!--------------------------------- Input Box ---------------------------------- -->
 
-    <div class="input-group mb-3 w-50 mx-auto">
-      <input
-        id="search-box"
-        type="text"
-        class="form-control"
-        placeholder="Type Your Book Name..."
-        aria-label="Recipient's username"
-        aria-describedby="button-addon2"
-      />
-      <button
-        onclick="loadBook()"
-        class="btn btn-outline-secondary"
-        type="button"
-        id="search-button"
-      >
-        Button
-      </button>
-    </div>
-    <!------------------------------------Spinner------------------------------ -->
+      <div class="input-group mb-3 w-50 mx-auto">
+        <input
+          id="search-box"
+          type="text"
+          class="form-control"
+          placeholder="Type Your Book Name..."
+          aria-label="Recipient's username"
+          aria-describedby="button-addon2"
+        />
+        <button
+          onclick="loadBook()"
+          class="btn btn-outline-secondary"
+          type="button"
+          id="search-button"
+        >
+          Button
+        </button>
+      </div>
+      <!------------------------------------Spinner------------------------------ -->
 
-    <div id="spinner" class="text-center">
-      <div class="spinner-border text-secondary" role="status"></div>
-      <h5 class="">Loading...</h5>
-    </div>
+      <div id="spinner" class="text-center">
+        <div class="spinner-border text-secondary" role="status"></div>
+        <h5 class="">Loading...</h5>
+      </div>
 
-    <!-- ----------------------------Error handling notify---------------------  -->
-    <div id="error-handle"></div>
-    <!-- ---------------------------Total number of result-----------------------  -->
-    <div id="total-result" class="text-center text-secondary mb-3"></div>
-    <!-- -----------------------------------Show Result--------------------------- -->
-    <div id="book-container" class="row row-cols-1 p-5 row-cols-md-3 g-4"></div>
+      <!-- ----------------------------Error handling notify---------------------  -->
+      <div id="error-handle"></div>
+      <!-- ---------------------------Total number of result-----------------------  -->
+      <div id="total-result" class="text-center text-secondary mb-3"></div>
+      <!-- -----------------------------------Show Result--------------------------- -->
+      <div
+        id="book-container"
+        class="row row-cols-1 m-3 row-cols-md-3 g-4"
+      ></div>
+    </sec>
 
     <!--------------------------- External Js Link --------------------------------->
     <script src="js/script.js"></script>
