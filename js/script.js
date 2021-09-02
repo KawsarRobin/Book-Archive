@@ -1,57 +1,56 @@
 const searchField = document.getElementById("search-box");
-const errorNotify = document.getElementById("error-handle");
 const bookContainer = document.getElementById("book-container");
-const TotalResultNumber = document.getElementById("total-result");
+const totalResultNumber = document.getElementById("total-result");
+const errorNotify = document.getElementById("error-handle");
+
+// ------------------------------------------Load Data from API ---------------------------------------//
 const loadBook = () => {
   const searchText = searchField.value;
-  //   console.log(searchText);
   if (searchText === "") {
-    errorNotify.innerHTML = `
-    <h3 class="text-center text-danger">Please Write Something!!!</h3>  
-    `;
+    //---------error handle--------//
+    errorNotify.innerHTML = ` <h3 class="text-center text-danger">Please Write Something!!!</h3> `;
     bookContainer.textContent = "";
-    TotalResultNumber.textContent = "";
+    totalResultNumber.textContent = "";
+    displaySpinner("none");
   } else {
-    fetch(`http://openlibrary.org/search.json?q=${searchText}`)
+    fetch(`https://openlibrary.org/search.json?q=${searchText}`)
       .then((res) => res.json())
       .then((data) => displayData(data));
+    displaySpinner("block");
   }
-  //Clear input field
+  //------Clear input field--------//
   searchField.value = "";
 };
-
+// --------------------------------------------------Display Book Data--------------------------------//
 const displayData = (data) => {
   const books = data.docs.slice(0, 30);
-  console.log(data.numFound);
-  TotalResultNumber.innerHTML = ` 
-<h5>Total Result found ${data.numFound}</h5>
-`;
+  //--------Display Total Data---------//
+  totalResultNumber.innerHTML = `<h5>Total ${data.numFound} Result found</h5>`;
   bookContainer.textContent = "";
-  // console.log(books);
+
   if (books.length === 0) {
-    errorNotify.innerHTML = `
-      <h3 class="text-center text-danger">No Result Found!!!</h3>  
-      `;
-    TotalResultNumber.textContent = "";
+    errorNotify.innerHTML = `<h3 class="text-center text-danger">No Result Found!!!</h3> `;
+    totalResultNumber.textContent = "";
+    displaySpinner("none");
   } else {
     books.forEach((book) => {
       errorNotify.textContent = "";
-      // console.log(book);
       const bookDiv = document.createElement("div");
       bookDiv.innerHTML = `
-          <div class="card">
-                <img src="https://covers.openlibrary.org/b/id/${
-                  book.cover_i
-                }-M.jpg" class="display-img" alt="..."/>
+          <div class="card overflow-hidden">
+                <img src='https://covers.openlibrary.org/b/id/${
+                  book.cover_i ? book.cover_i : 10909258
+                }-M.jpg' 
+                class="display-img" alt="..."/>
                 <div class="card-body">
                   <h5 class="fw-bold">${book.title}</h5>
                   <p class="">
-                    <span class="fw-bold">Author:</span> ${
-                      book.author_name ? book.author_name : ""
+                    <span class="fw-bold">Author: </span> ${
+                      book.author_name ? book.author_name[0] : ""
                     }
                   </p>
                   <p class="card-text">
-                  <span class="fw-bold"> First Published : </span>
+                  <span class="fw-bold"> First Published: </span>
                   ${book.first_publish_year ? book.first_publish_year : ""}
                   </p>
                   <p class="card-text">
@@ -63,5 +62,11 @@ const displayData = (data) => {
           `;
       bookContainer.appendChild(bookDiv);
     });
+    displaySpinner("none");
   }
+};
+//-------------------Display spinner--------------------------------//
+const displaySpinner = (value) => {
+  const spinner = document.getElementById("spinner");
+  spinner.style.display = value;
 };
